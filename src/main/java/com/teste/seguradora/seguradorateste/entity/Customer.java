@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.CascadeType;
 import lombok.Data;
 
 @Data
@@ -16,6 +18,6 @@ public class Customer {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Drivers driver;
 }

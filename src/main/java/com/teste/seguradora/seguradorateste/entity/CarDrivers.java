@@ -6,12 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
-import java.util.*;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
+import lombok.Data;
+
+@Data()
 @Entity
 @Table(name = "car_drivers")
 public class CarDrivers {
@@ -20,11 +22,12 @@ public class CarDrivers {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cars car;
 
-    @OneToMany
-    private List<Drivers> drivers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Drivers driver;
 
     @Column(name = "is_main_driver")
     private boolean isMainDriver;
